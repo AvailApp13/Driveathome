@@ -10,25 +10,31 @@
 
   <main class="container">
 
-    <!-- ROBOMASTER IMAGE -->
+    <!-- HERO IMAGE -->
     <div class="robot-wrap">
       <img src="assets/robomaster.png" alt="RoboMaster" class="robot-img" />
     </div>
 
     <!-- TARIFF TITLE -->
-    <h2 class="tariff-title">ТАРИФЫ</h2>
+    <div class="tariff-header">
+      <span class="tariff-label">ТАРИФЫ</span>
+    </div>
 
     <!-- TARIFF 5 MIN -->
     <div class="tariff">
       <div class="tariff-info">
         <h3>5 минут</h3>
-        <p>🔫 50 выстрелов</p>
+        <p class="shots">🔫 50 выстрелов</p>
         <p class="price">2.99$</p>
       </div>
 
       <div class="tariff-actions">
-        <button class="info-btn" onclick="openInfo('5')">i</button>
-        <button class="start-btn" onclick="startSession(5)">START</button>
+        <button class="info-btn" onclick="openInfo('5')" aria-label="Информация о тарифе">
+          i
+        </button>
+        <button class="start-btn" onclick="startSession(5)">
+          START
+        </button>
       </div>
     </div>
 
@@ -36,13 +42,17 @@
     <div class="tariff">
       <div class="tariff-info">
         <h3>10 минут</h3>
-        <p>🔫 100 выстрелов</p>
+        <p class="shots">🔫 100 выстрелов</p>
         <p class="price">4.99$</p>
       </div>
 
       <div class="tariff-actions">
-        <button class="info-btn" onclick="openInfo('10')">i</button>
-        <button class="start-btn" onclick="startSession(10)">START</button>
+        <button class="info-btn" onclick="openInfo('10')" aria-label="Информация о тарифе">
+          i
+        </button>
+        <button class="start-btn" onclick="startSession(10)">
+          START
+        </button>
       </div>
     </div>
 
@@ -51,8 +61,10 @@
   <!-- INFO POPUP -->
   <div id="info-modal" class="modal hidden">
     <div class="modal-content">
-      <h3 id="modal-title">Тариф</h3>
-      <p id="modal-text"></p>
+      <h3 id="modal-title">Информация о тарифе</h3>
+      <p id="modal-text">
+        <!-- текст подставим позже -->
+      </p>
       <button class="close-btn" onclick="closeInfo()">Закрыть</button>
     </div>
   </div>
