@@ -203,3 +203,24 @@ body {
 .footer .test {
   opacity: 0.7;
 }
+/* LIVE BLINKING DOT */
+.dot.live {
+  background: #ef4444;
+  box-shadow: 0 0 6px rgba(239,68,68,0.8);
+  animation: liveBlink 1.4s infinite;
+}
+
+@keyframes liveBlink {
+  0% {
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(239,68,68,0.9);
+  }
+  50% {
+    opacity: 0.25;
+    box-shadow: 0 0 2px rgba(239,68,68,0.3);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 6px rgba(239,68,68,0.9);
+  }
+}
