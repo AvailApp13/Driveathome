@@ -1,10 +1,42 @@
-function startSession(minutes, shots) {
-  alert(
-    `TEST MODE\n\nТариф: ${minutes} минут\nВыстрелы: ${shots}\n\nДальше будет:\n- поворот экрана\n- видео\n- управление`
-  );
+const startBtn = document.getElementById("startBtn");
+const timer = document.getElementById("timer");
+const timeValue = document.getElementById("timeValue");
+const statusText = document.getElementById("status");
 
-  // здесь позже будет:
-  // 1. переход в ландшафт
-  // 2. запуск видео
-  // 3. старт таймера и выстрелов
+let duration = 5 * 60; // 5 минут
+let countdown;
+
+function startSession() {
+  startBtn.disabled = true;
+  startBtn.textContent = "IN PROGRESS";
+
+  timer.classList.remove("hidden");
+  statusText.classList.remove("hidden");
+
+  let timeLeft = duration;
+  updateTimer(timeLeft);
+
+  countdown = setInterval(() => {
+    timeLeft--;
+    updateTimer(timeLeft);
+
+    if (timeLeft <= 0) {
+      endSession();
+    }
+  }, 1000);
 }
+
+function updateTimer(seconds) {
+  const min = String(Math.floor(seconds / 60)).padStart(2, "0");
+  const sec = String(seconds % 60).padStart(2, "0");
+  timeValue.textContent = `${min}:${sec}`;
+}
+
+function endSession() {
+  clearInterval(countdown);
+  startBtn.disabled = false;
+  startBtn.textContent = "START AGAIN";
+  statusText.textContent = "Session ended";
+}
+
+startBtn.addEventListener("click", startSession);
