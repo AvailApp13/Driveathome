@@ -1,6 +1,3 @@
-/* =====================
-   BASE
-===================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,12 +8,9 @@
 body {
   background: radial-gradient(circle at top, #0b0e14, #05070c);
   color: #e5e7eb;
-  min-height: 100vh;
 }
 
-/* =====================
-   HERO
-===================== */
+/* HERO */
 .hero {
   position: relative;
   height: 420px;
@@ -37,11 +31,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background: linear-gradient(
-    to top,
-    rgba(5,7,12,0.95),
-    rgba(5,7,12,0.35)
-  );
+  background: linear-gradient(to top, rgba(5,7,12,0.95), rgba(5,7,12,0.3));
 }
 
 .system-title {
@@ -88,9 +78,7 @@ body {
   opacity: 0.4;
 }
 
-/* =====================
-   MODES
-===================== */
+/* MODES */
 .modes {
   padding: 20px;
 }
@@ -107,9 +95,7 @@ body {
   margin-bottom: 14px;
 }
 
-/* =====================
-   MODE CARD
-===================== */
+/* MODE CARD */
 .mode-card {
   background: linear-gradient(180deg, #0f172a, #020617);
   border: 1px solid #1f2937;
@@ -136,11 +122,7 @@ body {
   margin-top: 12px;
 }
 
-/* =====================
-   BUTTONS
-===================== */
-
-/* INFO BUTTON */
+/* BUTTONS */
 .info-btn {
   width: 38px;
   height: 38px;
@@ -149,25 +131,8 @@ body {
   color: #9ca3af;
   font-size: 16px;
   cursor: pointer;
-  transition:
-    border-color 0.2s ease,
-    color 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.1s ease;
 }
 
-.info-btn:hover {
-  border-color: #00ff9c;
-  color: #00ff9c;
-  box-shadow: 0 0 8px rgba(0,255,156,0.35);
-}
-
-.info-btn:active {
-  transform: scale(0.92);
-  box-shadow: 0 0 12px rgba(0,255,156,0.55);
-}
-
-/* CONNECT BUTTON */
 .connect-btn {
   flex: 1;
   border: 1px solid #00ff9c;
@@ -176,22 +141,8 @@ body {
   font-size: 14px;
   letter-spacing: 1px;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.1s ease;
 }
 
-.connect-btn:hover {
-  box-shadow: 0 0 12px rgba(0,255,156,0.35);
-}
-
-.connect-btn:active {
-  background: rgba(0,255,156,0.18);
-  transform: scale(0.98);
-}
-
-/* PRICE */
 .mode-price {
   position: absolute;
   top: 14px;
@@ -200,9 +151,7 @@ body {
   color: #9ca3af;
 }
 
-/* =====================
-   INFO POPUP (DJI STYLE)
-===================== */
+/* POPUP */
 .info-overlay {
   position: fixed;
   inset: 0;
@@ -216,7 +165,7 @@ body {
 .info-modal {
   width: 90%;
   max-width: 360px;
-  background: linear-gradient(180deg, #020617, #020617);
+  background: #020617;
   border: 1px solid #1f2937;
   padding: 16px;
 }
@@ -241,17 +190,9 @@ body {
   color: #9ca3af;
   padding: 10px;
   cursor: pointer;
-  letter-spacing: 1px;
 }
 
-.info-close:hover {
-  border-color: #00ff9c;
-  color: #00ff9c;
-}
-
-/* =====================
-   FOOTER
-===================== */
+/* FOOTER */
 .footer {
   text-align: center;
   font-size: 11px;
