@@ -7,3 +7,4 @@ function startSession(minutes) {
   // - запуск таймера
   // - подключение джойстиков
 }
+
