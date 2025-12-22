@@ -1,95 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+}
+
+body {
+  background: #0b0b0b;
+  color: #ffffff;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  border-bottom: 1px solid #1e1e1e;
+}
+
 .logo {
-  text-align: center;
-  margin-top: 20px;
+  height: 36px;
 }
 
-.logo img {
-  max-width: 220px;
-  width: 100%;
-  height: auto;
-}
-
-.card {
-  max-width: 360px;
-  margin: 20px auto;
+/* CONTAINER */
+.container {
   padding: 16px;
-  background: #0f172a;
-  border-radius: 20px;
+}
+
+/* ROBOT IMAGE */
+.robot-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .robot-img {
   width: 100%;
-  max-height: 220px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 16px;
+  max-width: 320px;
 }
 
-/* TIMER */
-.timer {
-  position: fixed;
-  top: 20px;
-  text-align: center;
-}
-
-.timer-label {
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.timer-value {
-  font-size: 36px;
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
-}
-
-/* CARD */
-.card {
-  background: #141821;
-  border-radius: 16px;
-  padding: 24px;
-  width: 320px;
-  text-align: center;
-}
-
-.logo {
-  width: 100%;
-  border-radius: 12px;
+/* TARIFF CARD */
+.tariff {
+  background: #151515;
+  border-radius: 14px;
+  padding: 16px;
   margin-bottom: 16px;
-}
-
-.info {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
-  opacity: 0.8;
-  margin-bottom: 16px;
+  align-items: center;
 }
 
-/* BUTTON */
+.tariff-info h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.tariff-info p {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+.price {
+  margin-top: 6px;
+  font-weight: bold;
+  color: #7cff7c;
+}
+
+/* START BUTTON */
 .start-btn {
-  width: 100%;
-  padding: 14px;
+  background: #20c020;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 22px;
   font-size: 16px;
   font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #27c46b, #1fa857);
   color: #000;
   cursor: pointer;
 }
 
-.start-btn:disabled {
-  background: #555;
-  cursor: not-allowed;
-}
-
-/* STATUS */
-.status {
-  margin-top: 12px;
-  font-size: 13px;
-  opacity: 0.8;
+.start-btn:active {
+  transform: scale(0.96);
 }
