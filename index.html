@@ -1,183 +1,38 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DriveAtHome</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    body {
-      margin: 0;
-      background: radial-gradient(circle at top, #111 0%, #000 70%);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .screen {
-      display: none;
-      width: 100%;
-      max-width: 420px;
-      padding: 20px;
-    }
-
-    .screen.active {
-      display: block;
-    }
-
-    .card {
-      background: #0e1117;
-      border-radius: 20px;
-      padding: 20px;
-      box-shadow: 0 0 30px rgba(0,0,0,.6);
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: 22px;
-    }
-
-    .preview {
-      height: 220px;
-      border-radius: 12px;
-      background: #0b0f14;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      margin-bottom: 16px;
-    }
-
-    .info {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14px;
-      opacity: .8;
-      margin-bottom: 16px;
-    }
-
-    button {
-      width: 100%;
-      height: 56px;
-      border-radius: 14px;
-      border: none;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .btn-start {
-      background: #2ecc71;
-      color: #000;
-    }
-
-    .btn-disabled {
-      background: #444;
-      color: #aaa;
-      cursor: default;
-    }
-
-    .timer {
-      text-align: center;
-      font-size: 40px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    .status {
-      text-align: center;
-      margin-top: 12px;
-      opacity: .7;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ГЛАВНЫЙ ЭКРАН -->
-  <div id="menuScreen" class="screen active">
-    <div class="card">
-      <h1>DriveAtHome</h1>
+  <div class="menu">
+    <img src="assets/logo.png" class="logo" alt="DriveAtHome">
 
-      <div class="preview">
-        Camera preview
+    <img src="assets/robomaster.png" class="robot">
+
+    <div class="tariff">
+      <div>
+        <strong>5 минут</strong><br>
+        50 выстрелов
       </div>
-
-      <div class="info">
-        <span>5 минут</span>
-        <span>50 выстрелов</span>
-      </div>
-
-      <button class="btn-start" onclick="startSession()">
-        START
-      </button>
-    </div>
-  </div>
-
-  <!-- ЭКРАН СЕССИИ -->
-  <div id="sessionScreen" class="screen">
-    <div class="timer" id="timer">
-      05:00
+      <button onclick="startSession(5)">START</button>
     </div>
 
-    <div class="card">
-      <h1>DriveAtHome</h1>
-
-      <div class="preview">
-        Camera preview
+    <div class="tariff">
+      <div>
+        <strong>10 минут</strong><br>
+        100 выстрелов
       </div>
-
-      <div class="info">
-        <span>5 минут</span>
-        <span>50 выстрелов</span>
-      </div>
-
-      <button class="btn-disabled">
-        IN PROGRESS
-      </button>
-
-      <div class="status">
-        Connecting to robot...
-      </div>
+      <button onclick="startSession(10)">START</button>
     </div>
   </div>
 
   <script>
-    let timeLeft = 300;
-    let timerInterval = null;
-
-    function startSession() {
-      document.getElementById("menuScreen").classList.remove("active");
-      document.getElementById("sessionScreen").classList.add("active");
-      startTimer();
-    }
-
-    function startTimer() {
-      updateTimer();
-
-      timerInterval = setInterval(() => {
-        timeLeft--;
-
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          document.getElementById("timer").innerText = "00:00";
-          return;
-        }
-
-        updateTimer();
-      }, 1000);
-    }
-
-    function updateTimer() {
-      const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
-      const seconds = String(timeLeft % 60).padStart(2, "0");
-      document.getElementById("timer").innerText = `${minutes}:${seconds}`;
+    function startSession(minutes) {
+      window.location.href = `session.html?time=${minutes}`;
     }
   </script>
 
