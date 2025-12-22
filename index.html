@@ -4,30 +4,67 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DriveAtHome</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-  <!-- TIMER -->
-  <div id="timer" class="timer hidden">
-    <div class="timer-label">TIME LEFT</div>
-    <div class="timer-value" id="timeValue">05:00</div>
-  </div>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #111 0%, #000 60%);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-  <!-- MAIN CARD -->
-  <div class="card">
-    <img src="assets/image-22-12-25-11-25.jpeg" class="logo" alt="DriveAtHome">
+    .wrapper {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+      text-align: center;
+    }
 
-    <div class="info">
-      <span>5 минут</span>
-      <span>50 выстрелов</span>
-    </div>
+    .timer {
+      font-size: 42px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      display: none;
+    }
 
-    <button id="startBtn" class="start-btn">START</button>
+    .card {
+      background: linear-gradient(180deg, #0f1722, #0b1018);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
 
-    <div id="status" class="status hidden">Connecting to robot…</div>
-  </div>
+    .card h1 {
+      text-align: left;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
 
-  <script src="script.js"></script>
-</body>
-</html>
+    .preview {
+      height: 240px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 15px;
+    }
+
+    .info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      opacity: 0.8;
+      margin-bottom: 15px;
+    }
+
+    .button {
+      width: 100%;
+      height: 52px;
+      border-radius: 14px;
+      border: none;
