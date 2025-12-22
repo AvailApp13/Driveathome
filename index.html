@@ -8,15 +8,15 @@
 </head>
 <body>
 
-  <!-- HERO / DEVICE PREVIEW -->
+  <!-- HERO -->
   <section class="hero">
-    <img src="assets/robomaster.png" alt=" Dji RoboMaster S1" class="hero-image" />
+    <img src="assets/robomaster.png" alt="DJI RoboMaster S1" class="hero-image" />
 
     <div class="hero-overlay">
       <div class="system-title">CONTROL MODE</div>
       <h1>УПРАВЛЯЙ НАСТОЯЩИМ<br>БОЕВЫМ РОБОТОМ</h1>
       <p class="hero-sub">
-        Live-подключение к реальному Dji RoboMaster S1<br>
+        Live-подключение к реальному DJI RoboMaster S1<br>
         Не симуляция. Не запись.
       </p>
 
@@ -33,10 +33,10 @@
     <div class="modes-title">LIVE ACCESS</div>
     <div class="modes-sub">Choose session duration</div>
 
-    <!-- MODE 5 -->
+    <!-- SESSION 5 -->
     <div class="mode-card">
       <div class="mode-info">
-        <div class="mode-name">SESSION 05:00 minutes</div>
+        <div class="mode-name">SESSION 05:00</div>
         <div class="mode-desc">
           • 50 shots<br>
           • Live video<br>
@@ -52,10 +52,10 @@
       <div class="mode-price">$2.99</div>
     </div>
 
-    <!-- MODE 10 -->
+    <!-- SESSION 10 -->
     <div class="mode-card">
       <div class="mode-info">
-        <div class="mode-name">SESSION 10:00 minutes</div>
+        <div class="mode-name">SESSION 10:00</div>
         <div class="mode-desc">
           • 100 shots<br>
           • Live video<br>
@@ -71,6 +71,15 @@
       <div class="mode-price">$4.99</div>
     </div>
   </section>
+
+  <!-- INFO POPUP -->
+  <div id="infoOverlay" class="info-overlay" style="display:none;">
+    <div class="info-modal">
+      <div class="info-title">LIVE SESSION INFO</div>
+      <div id="infoText" class="info-text"></div>
+      <button class="info-close" onclick="closeInfo()">CLOSE</button>
+    </div>
+  </div>
 
   <!-- FOOTER -->
   <footer class="footer">
