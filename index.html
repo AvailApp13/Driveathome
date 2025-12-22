@@ -1,40 +1,48 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DriveAtHome</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>DriveAtHome</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <div class="menu">
-    <img src="assets/logo.png" class="logo" alt="DriveAtHome">
+  <!-- HEADER -->
+  <header class="header">
+    <img src="assets/logo.png" alt="DriveAtHome" class="logo" />
+  </header>
 
-    <img src="assets/robomaster.png" class="robot">
+  <!-- MAIN -->
+  <main class="container">
 
-    <div class="tariff">
-      <div>
-        <strong>5 минут</strong><br>
-        50 выстрелов
-      </div>
-      <button onclick="startSession(5)">START</button>
-    </div>
+    <!-- ROBOMASTER IMAGE -->
+    <div class="robot-wrap">
+      <img src="assets/robomaster.png" alt="RoboMaster" class="robot-img" />
+    </div>
 
-    <div class="tariff">
-      <div>
-        <strong>10 минут</strong><br>
-        100 выстрелов
-      </div>
-      <button onclick="startSession(10)">START</button>
-    </div>
-  </div>
+    <!-- TARIFF 5 MIN -->
+    <div class="tariff">
+      <div class="tariff-info">
+        <h2>5 минут</h2>
+        <p>🔫 50 выстрелов</p>
+        <p class="price">TEST</p>
+      </div>
+      <button class="start-btn" onclick="startSession(5)">START</button>
+    </div>
 
-  <script>
-    function startSession(minutes) {
-      window.location.href = `session.html?time=${minutes}`;
-    }
-  </script>
+    <!-- TARIFF 10 MIN -->
+    <div class="tariff">
+      <div class="tariff-info">
+        <h2>10 минут</h2>
+        <p>🔫 100 выстрелов</p>
+        <p class="price">TEST</p>
+      </div>
+      <button class="start-btn" onclick="startSession(10)">START</button>
+    </div>
 
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
