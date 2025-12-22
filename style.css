@@ -1,16 +1,28 @@
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+.logo {
+  text-align: center;
+  margin-top: 20px;
 }
 
-body {
-  margin: 0;
-  background: #0c0f14;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.logo img {
+  max-width: 220px;
+  width: 100%;
+  height: auto;
+}
+
+.card {
+  max-width: 360px;
+  margin: 20px auto;
+  padding: 16px;
+  background: #0f172a;
+  border-radius: 20px;
+}
+
+.robot-img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 16px;
 }
 
 /* TIMER */
