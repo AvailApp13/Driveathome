@@ -2,50 +2,31 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DriveAtHome</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <img src="assets/logo.png" alt="DriveAtHome" class="logo">
-  </header>
+  <!-- TIMER -->
+  <div id="timer" class="timer hidden">
+    <div class="timer-label">TIME LEFT</div>
+    <div class="timer-value" id="timeValue">05:00</div>
+  </div>
 
-  <!-- ROBOMASTER IMAGE -->
-  <section class="robot">
-    <img src="assets/robomaster.png" alt="RoboMaster">
-  </section>
+  <!-- MAIN CARD -->
+  <div class="card">
+    <img src="assets/image-22-12-25-11-25.jpeg" class="logo" alt="DriveAtHome">
 
-  <!-- TARIFFS -->
-  <section class="tariffs">
-
-    <!-- 5 MIN -->
-    <div class="tariff">
-      <div class="tariff-info">
-        <h2>5 минут</h2>
-        <p>50 выстрелов</p>
-        <span class="price">TEST</span>
-      </div>
-      <button class="start-btn" onclick="startSession(5, 50)">
-        START
-      </button>
+    <div class="info">
+      <span>5 минут</span>
+      <span>50 выстрелов</span>
     </div>
 
-    <!-- 10 MIN -->
-    <div class="tariff">
-      <div class="tariff-info">
-        <h2>10 минут</h2>
-        <p>100 выстрелов</p>
-        <span class="price">TEST</span>
-      </div>
-      <button class="start-btn" onclick="startSession(10, 100)">
-        START
-      </button>
-    </div>
+    <button id="startBtn" class="start-btn">START</button>
 
-  </section>
+    <div id="status" class="status hidden">Connecting to robot…</div>
+  </div>
 
   <script src="script.js"></script>
 </body>
