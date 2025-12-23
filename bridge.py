@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, request
 import json
 import os
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ def load_promos():
 
 def save_promos(data):
     with open(PROMO_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, indent=2)
 
 
 @app.route("/")
@@ -32,41 +32,36 @@ def status():
     })
 
 
-@app.route("/promo/check", methods=["POST"])
-def promo_check():
-    data = request.get_json(force=True)
-    code = data.get("code", "").strip()
+@app.route("/promo", methods=["POST"])
+def promo():
+    data = request.get_json()
+    if not data or "code" not in data:
+        return jsonify({"ok": False, "error": "NO_CODE"}), 400
 
-    if not code:
-        return jsonify({
-            "ok": False,
-            "error": "NO_CODE"
-        }), 400
+    code = data["code"].strip()
 
     promos = load_promos()
 
     if code not in promos:
-        return jsonify({
-            "ok": False,
-            "error": "INVALID_CODE"
-        }), 404
+        return jsonify({"ok": False, "error": "INVALID_CODE"}), 404
 
     promo = promos[code]
 
-    if promo.get("used", False):
-        return jsonify({
-            "ok": False,
-            "error": "CODE_ALREADY_USED"
-        }), 403
+    if promo.get("used"):
+        return jsonify({"ok": False, "error": "CODE_ALREADY_USED"}), 403
 
-    # помечаем код как использованный
-    promo["used"] = True
-    promos[code] = promo
+    minutes = promo.get("minutes", 0)
+
+    if minutes <= 0:
+        return jsonify({"ok": False, "error": "INVALID_MINUTES"}), 500
+
+    # помечаем как использованный
+    promos[code]["used"] = True
     save_promos(promos)
 
     return jsonify({
         "ok": True,
-        "minutes": promo.get("minutes", 5)
+        "minutes": minutes
     })
 
 
