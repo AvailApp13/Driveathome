@@ -8,13 +8,15 @@ PROMO_FILE = os.path.join("promo", "promo_codes.json")
 
 
 def load_promos():
+    if not os.path.exists(PROMO_FILE):
+        return {}
     with open(PROMO_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_promos(data):
     with open(PROMO_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2)
+        json.dump(data, f, indent=2, ensure_ascii=False)
 
 
 @app.route("/")
@@ -31,31 +33,40 @@ def status():
 
 
 @app.route("/promo/check", methods=["POST"])
-def check_promo():
-    data = request.json
+def promo_check():
+    data = request.get_json(force=True)
     code = data.get("code", "").strip()
 
     if not code:
-        return jsonify({"ok": False, "error": "NO_CODE"}), 400
+        return jsonify({
+            "ok": False,
+            "error": "NO_CODE"
+        }), 400
 
     promos = load_promos()
 
     if code not in promos:
-        return jsonify({"ok": False, "error": "INVALID_CODE"}), 404
+        return jsonify({
+            "ok": False,
+            "error": "INVALID_CODE"
+        }), 404
 
     promo = promos[code]
 
-    if promo.get("used"):
-        return jsonify({"ok": False, "error": "CODE_ALREADY_USED"}), 403
+    if promo.get("used", False):
+        return jsonify({
+            "ok": False,
+            "error": "CODE_ALREADY_USED"
+        }), 403
 
-    # помечаем как использованный
+    # помечаем код как использованный
     promo["used"] = True
     promos[code] = promo
     save_promos(promos)
 
     return jsonify({
         "ok": True,
-        "minutes": promo["minutes"]
+        "minutes": promo.get("minutes", 5)
     })
 
 
