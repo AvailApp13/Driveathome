@@ -41,6 +41,7 @@ html, body {
   font-weight: 700;
 }
 
+/* ===== LIVE STATUS ===== */
 .live {
   display: flex;
   align-items: center;
@@ -54,12 +55,25 @@ html, body {
   height: 10px;
   border-radius: 50%;
   background: #ef4444;
-  animation: blink 1.2s infinite;
 }
 
-@keyframes blink {
-  0%,100% { opacity: 1; }
-  50% { opacity: .3; }
+.live.green .live-dot {
+  background: #22c55e;
+  animation: pulse 1.4s infinite;
+}
+
+.live.yellow .live-dot {
+  background: #facc15;
+}
+
+.live.red .live-dot {
+  background: #ef4444;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,.7); }
+  70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
 }
 
 /* ===== VIDEO ===== */
@@ -195,8 +209,9 @@ html, body {
 
 <div class="hud-top">
   <div class="timer" id="timer">05:00</div>
-  <div class="live">
-    <div class="live-dot"></div> LIVE
+  <div class="live red" id="liveStatus">
+    <div class="live-dot"></div>
+    <span id="liveText">BUSY</span>
   </div>
 </div>
 
@@ -232,10 +247,25 @@ function tick() {
   timer.textContent = `${m}:${s}`;
   if (total > 0) total--;
 }
-
 tick();
 setInterval(tick, 1000);
 
+/* ===== LIVE STATUS CONTROL (SDK READY) ===== */
+function setLiveState(state) {
+  const el = document.getElementById("liveStatus");
+  const text = document.getElementById("liveText");
+
+  el.className = "live " + state;
+
+  if (state === "green") text.textContent = "LIVE NOW";
+  if (state === "yellow") text.textContent = "RESERVED";
+  if (state === "red") text.textContent = "BUSY";
+}
+
+/* === CURRENT STATE: BUSY === */
+setLiveState("red");
+
+/* ===== END ===== */
 function endSession() {
   window.location.href = "index.html";
 }
