@@ -1,1 +1,116 @@
-z
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>DriveAtHome — Payment</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #0b0e14, #05070c);
+      color: #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      width: 90%;
+      max-width: 380px;
+      background: linear-gradient(180deg, #0f172a, #020617);
+      border: 1px solid #1f2937;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      font-size: 13px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+
+    .info {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .pay-btn {
+      width: 100%;
+      height: 52px;
+      border-radius: 14px;
+      border: 1px solid #00ff9c;
+      background: rgba(0,255,156,0.1);
+      color: #00ff9c;
+      font-size: 15px;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .pay-btn:active {
+      background: rgba(0,255,156,0.2);
+    }
+
+    .test {
+      margin-top: 14px;
+      font-size: 11px;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="title">SESSION PAYMENT</div>
+    <div class="sub">Live RoboMaster control</div>
+
+    <div class="info" id="sessionInfo">Loading…</div>
+    <div class="price" id="priceValue">$0.00</div>
+
+    <button class="pay-btn" onclick="pay()">PAY (TEST MODE)</button>
+
+    <div class="test">No real payment · Test flow only</div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const time = params.get("time") || "5";
+
+    const sessionInfo = document.getElementById("sessionInfo");
+    const priceValue = document.getElementById("priceValue");
+
+    if (time === "10") {
+      sessionInfo.textContent = "10 minutes · Full control · 100 shots";
+      priceValue.textContent = "$4.99";
+    } else {
+      sessionInfo.textContent = "5 minutes · Full control · 50 shots";
+      priceValue.textContent = "$2.99";
+    }
+
+    function pay() {
+      // TEST FLOW — потом заменим на PayPal SDK
+      window.location.href = `session_full.html?time=${time}`;
+    }
+  </script>
+
+</body>
+</html>
