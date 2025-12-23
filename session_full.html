@@ -17,24 +17,22 @@ html, body {
   width: 100%;
   height: 100%;
   background: #05070c;
-  color: #fff;
   overflow: hidden;
+  color: #fff;
 }
 
-/* ===== FORCE LANDSCAPE FEEL ===== */
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* ===== TOP BAR ===== */
-.top-bar {
-  height: 60px;
-  padding: 10px 16px;
+/* ===== TOP HUD ===== */
+.hud-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.2));
+  background: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.2));
   z-index: 10;
 }
 
@@ -55,55 +53,54 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: red;
-  animation: blink 1s infinite;
+  background: #ef4444;
+  animation: blink 1.2s infinite;
 }
 
 @keyframes blink {
   0%,100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50% { opacity: .3; }
 }
 
-/* ===== VIDEO AREA ===== */
-.video-wrapper {
-  flex: 1;
-  position: relative;
-  margin: 10px;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,0.15);
-  background: radial-gradient(circle, #111827, #020617);
+/* ===== VIDEO ===== */
+.video {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #111827, #020617);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
-.video-placeholder {
-  opacity: 0.35;
+.video span {
+  opacity: .35;
   font-size: 14px;
 }
 
 /* ===== CROSSHAIR ===== */
 .crosshair {
   position: absolute;
-  width: 60px;
-  height: 60px;
-  border: 2px solid rgba(255,255,255,0.5);
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(255,255,255,.6);
   border-radius: 50%;
+  z-index: 5;
 }
 
 .crosshair:before,
 .crosshair:after {
   content: "";
   position: absolute;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,.6);
 }
 
 .crosshair:before {
   width: 2px;
   height: 100%;
   left: 50%;
-  top: 0;
   transform: translateX(-50%);
 }
 
@@ -111,137 +108,133 @@ body {
   height: 2px;
   width: 100%;
   top: 50%;
-  left: 0;
   transform: translateY(-50%);
 }
 
 /* ===== CONTROLS ===== */
 .controls {
-  height: 120px;
-  padding: 10px 16px 20px;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  padding: 0 16px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  z-index: 10;
 }
 
-.stick {
-  width: 90px;
-  height: 90px;
+.joystick {
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
-  background: radial-gradient(circle, #1f2937, #020617);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.2);
   position: relative;
 }
 
-.stick::after {
+.joystick::after {
   content: "";
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: #9ca3af;
+  background: rgba(255,255,255,.5);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0.7;
 }
 
-/* ===== ACTION BUTTONS ===== */
+/* ===== ACTIONS ===== */
 .actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.btn {
-  width: 90px;
-  height: 44px;
-  border-radius: 14px;
-  border: none;
-  font-weight: 700;
-  letter-spacing: 1px;
+  gap: 14px;
 }
 
 .fire {
+  width: 96px;
+  height: 56px;
+  border-radius: 18px;
+  border: none;
+  font-weight: 800;
+  letter-spacing: 1px;
   background: linear-gradient(90deg, #ef4444, #dc2626);
   color: #fff;
 }
 
 .zoom {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-}
-
-/* ===== END SESSION ===== */
-.end-session {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 40px);
-  max-width: 420px;
-  height: 46px;
-  border-radius: 16px;
-  border: none;
-  background: rgba(255,255,255,0.08);
+  width: 96px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.3);
+  background: rgba(255,255,255,.08);
   color: #fff;
   font-weight: 600;
+}
+
+/* ===== END ===== */
+.end {
+  position: absolute;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 44px;
+  border-radius: 16px;
+  border: none;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  font-weight: 600;
+  z-index: 10;
 }
 </style>
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="top-bar">
+<div class="hud-top">
   <div class="timer" id="timer">05:00</div>
   <div class="live">
     <div class="live-dot"></div> LIVE
   </div>
 </div>
 
-<!-- VIDEO -->
-<div class="video-wrapper">
-  <div class="video-placeholder">Video stream</div>
-  <div class="crosshair"></div>
+<div class="video">
+  <span>Live video stream</span>
 </div>
 
-<!-- CONTROLS -->
+<div class="crosshair"></div>
+
 <div class="controls">
-  <div class="stick"></div>
+  <div class="joystick"></div>
 
   <div class="actions">
-    <button class="btn fire">FIRE</button>
-    <button class="btn zoom">ZOOM</button>
+    <button class="fire">FIRE</button>
+    <button class="zoom">ZOOM</button>
   </div>
 
-  <div class="stick"></div>
+  <div class="joystick"></div>
 </div>
 
-<button class="end-session" onclick="endSession()">END SESSION</button>
+<button class="end" onclick="endSession()">END SESSION</button>
 
 <script>
 /* ===== TIMER ===== */
 const params = new URLSearchParams(window.location.search);
 const minutes = parseInt(params.get("time"), 10) || 5;
-let totalSeconds = minutes * 60;
+let total = minutes * 60;
+const timer = document.getElementById("timer");
 
-const timerEl = document.getElementById("timer");
-
-function updateTimer() {
-  const m = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
-  const s = String(totalSeconds % 60).padStart(2, "0");
-  timerEl.textContent = `${m}:${s}`;
+function tick() {
+  const m = String(Math.floor(total / 60)).padStart(2,"0");
+  const s = String(total % 60).padStart(2,"0");
+  timer.textContent = `${m}:${s}`;
+  if (total > 0) total--;
 }
 
-updateTimer();
-
-setInterval(() => {
-  totalSeconds--;
-  if (totalSeconds <= 0) return;
-  updateTimer();
-}, 1000);
+tick();
+setInterval(tick, 1000);
 
 function endSession() {
   window.location.href = "index.html";
