@@ -1,6 +1,13 @@
 import json
 import os
+import threading
+import asyncio
+
 from flask import Flask, request, jsonify
+
+# ===============================
+# FLASK HTTP API (БЫЛО — НЕ ТРОГАЕМ)
+# ===============================
 
 app = Flask(__name__)
 
@@ -39,7 +46,6 @@ def promo():
         return jsonify({"ok": False, "error": "NO_CODE"}), 400
 
     code = data["code"].strip()
-
     promos = load_promos()
 
     if code not in promos:
@@ -55,7 +61,6 @@ def promo():
     if minutes <= 0:
         return jsonify({"ok": False, "error": "INVALID_MINUTES"}), 500
 
-    # помечаем как использованный
     promos[code]["used"] = True
     save_promos(promos)
 
@@ -65,6 +70,52 @@ def promo():
     })
 
 
+# ===============================
+# WEBSOCKET CONTROL (НОВОЕ, БЕЗОПАСНО)
+# ===============================
+
+import websockets
+
+async def ws_handler(websocket):
+    print("WS client connected")
+    try:
+        async for message in websocket:
+            data = json.loads(message)
+            print("WS RECEIVED:", data)
+
+            action = data.get("action")
+
+            if action == "fire":
+                print("🔥 FIRE command")
+
+            elif action == "move":
+                print(f"🚗 MOVE x={data.get('x')} y={data.get('y')}")
+
+            elif action == "aim":
+                print(f"🎯 AIM yaw={data.get('yaw')} pitch={data.get('pitch')}")
+
+    except Exception as e:
+        print("WS error:", e)
+
+
+async def ws_main():
+    async with websockets.serve(ws_handler, "0.0.0.0", 8765):
+        print("WS running on ws://0.0.0.0:8765")
+        await asyncio.Future()
+
+
+def start_ws():
+    asyncio.run(ws_main())
+
+
+# ===============================
+# ENTRY POINT (БЫЛО — ОСТАВЛЯЕМ)
+# ===============================
+
 if __name__ == "__main__":
     print("OK BRIDGE START")
-    app.run(port=5000)
+
+    ws_thread = threading.Thread(target=start_ws, daemon=True)
+    ws_thread.start()
+
+    app.run(host="0.0.0.0", port=5000)
