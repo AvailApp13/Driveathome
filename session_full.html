@@ -102,6 +102,7 @@ html, body {
   border: 2px solid rgba(255,255,255,.6);
   border-radius: 50%;
   z-index: 5;
+  pointer-events: none;
 }
 
 .crosshair:before,
@@ -147,19 +148,6 @@ html, body {
   position: relative;
 }
 
-.joystick::after {
-  content: "";
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.5);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* ===== ACTIONS ===== */
 .actions {
   display: flex;
   flex-direction: column;
@@ -222,17 +210,20 @@ html, body {
 <div class="crosshair"></div>
 
 <div class="controls">
-  <div class="joystick"></div>
+  <div class="joystick" id="moveJoystick"></div>
 
   <div class="actions">
     <button class="fire">FIRE</button>
     <button class="zoom">ZOOM</button>
   </div>
 
-  <div class="joystick"></div>
+  <div class="joystick" id="aimJoystick"></div>
 </div>
 
 <button class="end" onclick="endSession()">END SESSION</button>
+
+<!-- nipplejs -->
+<script src="https://cdn.jsdelivr.net/npm/nipplejs@0.10.1/dist/nipplejs.min.js"></script>
 
 <script>
 /* ===== TIMER ===== */
@@ -250,20 +241,62 @@ function tick() {
 tick();
 setInterval(tick, 1000);
 
-/* ===== LIVE STATUS CONTROL (SDK READY) ===== */
+/* ===== LIVE STATUS ===== */
 function setLiveState(state) {
   const el = document.getElementById("liveStatus");
   const text = document.getElementById("liveText");
-
   el.className = "live " + state;
-
   if (state === "green") text.textContent = "LIVE NOW";
   if (state === "yellow") text.textContent = "RESERVED";
   if (state === "red") text.textContent = "BUSY";
 }
-
-/* === CURRENT STATE: BUSY === */
 setLiveState("red");
+
+/* ===== SAFE COMMAND SENDER ===== */
+function sendCommand(cmd) {
+  console.log("SEND:", cmd);
+}
+
+/* ===== JOYSTICKS ===== */
+let controlEnabled = true;
+
+const moveJoystick = nipplejs.create({
+  zone: document.getElementById('moveJoystick'),
+  mode: 'static',
+  position: { left: '50%', top: '50%' },
+  size: 96,
+  color: 'white'
+});
+
+const aimJoystick = nipplejs.create({
+  zone: document.getElementById('aimJoystick'),
+  mode: 'static',
+  position: { left: '50%', top: '50%' },
+  size: 96,
+  color: 'white'
+});
+
+moveJoystick.on('move', (evt, data) => {
+  if (!controlEnabled || !data) return;
+  const x = Math.cos(data.angle.radian) * (data.distance / 50);
+  const y = Math.sin(data.angle.radian) * (data.distance / 50);
+  sendCommand({ action: "move", x: +x.toFixed(2), y: +y.toFixed(2) });
+});
+
+moveJoystick.on('end', () => {
+  sendCommand({ action: "move", x: 0, y: 0 });
+});
+
+aimJoystick.on('move', (evt, data) => {
+  if (!controlEnabled || !data) return;
+  const yaw = Math.cos(data.angle.radian) * (data.distance / 50);
+  const pitch = Math.sin(data.angle.radian) * (data.distance / 50);
+  sendCommand({ action: "aim", yaw: +yaw.toFixed(2), pitch: +pitch.toFixed(2) });
+});
+
+aimJoystick.on('end', () => {
+  sendCommand({ action: "aim", yaw: 0, pitch: 0 });
+});
 
 /* ===== END ===== */
 function endSession() {
