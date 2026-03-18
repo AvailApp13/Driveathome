@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Driveathome — Live Session</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <div class="session-wrap">
+    <div class="hud-top">
+      <div class="timer" id="timer">00:10</div>
+      <div class="badge"><span class="dot red" id="sessionDot"></span><span id="sessionStatus">Connecting…</span></div>
+    </div>
+
+    <div class="video">
+      <img id="videoFeed" alt="Live video feed" />
+      <div class="video-fallback" id="videoFallback">Connecting to live video…</div>
+    </div>
+
+    <div class="countdown" id="countdown">10</div>
+
+    <div class="fire-stack">
+      <button class="fire-btn" id="fireSmall">FIRE</button>
+      <button class="fire-btn large" id="fireLarge">FIRE</button>
+    </div>
+
+    <div class="center-actions">
+      <button class="secondary start-btn" id="startButton">START SESSION</button>
+      <button class="secondary" id="endButton">END</button>
+    </div>
+
+    <div class="controls">
+      <div class="joystick" id="moveJoystick"><div class="stick"></div></div>
+      <div class="joystick" id="aimJoystick"><div class="stick"></div></div>
+    </div>
+  </div>
+
+  <script src="session.js"></script>
+</body>
+</html>

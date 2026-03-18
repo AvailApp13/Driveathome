@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driveathome — Payment</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <div class="container">
+    <section class="section">
+      <div class="panel form-card">
+        <div class="section-title">SESSION CHECKOUT</div>
+        <p class="section-sub">Keep this as test mode until you connect PayPal buttons later.</p>
+        <div id="summary" class="muted" style="margin-bottom:16px;"></div>
+        <div class="row">
+          <input class="input" id="nickname" placeholder="Your nickname" maxlength="30" />
+          <button class="primary" style="width:100%" onclick="createTestSession()">PAY (TEST MODE)</button>
+          <button class="secondary" style="width:100%" onclick="history.back()">BACK</button>
+        </div>
+        <p class="muted" id="paymentMsg" style="margin-top:10px;">No real payment yet. This creates a test session so you can validate the robot workflow first.</p>
+      </div>
+    </section>
+  </div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const minutes = parseInt(params.get('minutes') || '5', 10);
+    document.getElementById('summary').textContent = `Selected session: ${minutes} minute${minutes===1?'':'s'}.`;
+  </script>
+  <script src="payment.js"></script>
+</body>
+</html>

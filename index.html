@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driveathome — Live RoboMaster S1</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <img src="assets/robomaster.png" alt="RoboMaster S1" />
+      <div class="hero-overlay">
+        <div class="system-title">LIVE REMOTE PLAY</div>
+        <h1>Drive a real DJI RoboMaster S1 from your phone.</h1>
+        <p class="hero-sub">Choose a paid session or redeem a one-time promo code. One player at a time. Live video, mobile controls, instant start.</p>
+        <div class="status-pill">
+          <span class="dot green" id="statusDot"></span>
+          <span id="statusLabel">Checking robot…</span>
+          <span id="statusCountdown"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">CONTROL MODES</div>
+      <div class="section-sub">Keep your current design flow. Start with 5 or 10 minutes, or use a promo code.</div>
+      <div class="grid">
+        <article class="card">
+          <div class="price" id="price5">$5</div>
+          <h3>5 MINUTE SESSION</h3>
+          <div class="desc">Short test run. Best for first-time players and promo conversions.</div>
+          <div class="actions">
+            <button class="info-btn" onclick="showInfo('5 minute session', '10 second pre-start countdown, then 5 minutes of active control.')">i</button>
+            <button class="primary" id="buy5Btn" onclick="goPayment(5)">START 5 MIN</button>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="price" id="price10">$9</div>
+          <h3>10 MINUTE SESSION</h3>
+          <div class="desc">Longer live run with more time to move, aim, fire and explore the arena.</div>
+          <div class="actions">
+            <button class="info-btn" onclick="showInfo('10 minute session', '10 second pre-start countdown, then 10 minutes of active control.')">i</button>
+            <button class="primary" id="buy10Btn" onclick="goPayment(10)">START 10 MIN</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel form-card">
+        <div class="section-title">PROMO ACCESS</div>
+        <p class="section-sub">For launch outreach. Codes are one-time and can be 5 or 10 minutes.</p>
+        <div class="row">
+          <input class="input" id="nickname" placeholder="Your nickname" maxlength="30" />
+          <input class="input" id="promoCode" placeholder="Promo code" maxlength="40" />
+          <button class="primary" style="width:100%" onclick="redeemPromo()">REDEEM PROMO</button>
+        </div>
+        <p class="muted" id="promoMsg" style="margin-top:10px;"></p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="panel">
+        <div class="section-title">HOW IT WORKS</div>
+        <div class="section-sub">Simple launch flow for MVP.</div>
+        <p class="muted">1. Enter nickname. 2. Pay or redeem promo. 3. You land on the session page. 4. A 10 second countdown starts automatically. 5. You drive with two on-screen joysticks and a fire button.</p>
+      </div>
+    </section>
+
+    <footer class="footer">Driveathome · live MVP flow · robot status is shown in real time</footer>
+  </div>
+
+  <div id="infoOverlay" class="info-overlay" style="display:none">
+    <div class="info-modal">
+      <div class="info-title" id="infoTitle">Info</div>
+      <div class="info-text" id="infoText"></div>
+      <button class="info-close" onclick="closeInfo()">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

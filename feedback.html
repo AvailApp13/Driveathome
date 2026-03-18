@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driveathome — Feedback</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="config.js"></script>
+</head>
+<body>
+  <div class="container">
+    <section class="section">
+      <div class="panel feedback-box">
+        <div class="section-title">LEAVE FEEDBACK</div>
+        <p class="section-sub">Tell us how the session felt. This helps improve speed, controls and quality.</p>
+        <input class="input" id="name" placeholder="Nickname" maxlength="30" />
+        <textarea class="input" id="message" placeholder="How was the speed, connection and control feel?"></textarea>
+        <div class="row" style="margin-top:12px;">
+          <button class="primary" style="width:100%" onclick="sendFeedback()">SEND FEEDBACK</button>
+          <a class="button secondary" style="width:100%;text-align:center" href="index.html">BACK TO HOME</a>
+        </div>
+        <p class="muted" id="feedbackMsg" style="margin-top:10px;"></p>
+      </div>
+    </section>
+  </div>
+  <script src="feedback.js"></script>
+</body>
+</html>
